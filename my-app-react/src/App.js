@@ -1,5 +1,6 @@
 //import logo from './logo.svg';
 import './App.css';
+import HelloWord from './components/HelloWorld';
 
 function App() {
   //podemos trabalhar também com JS, além de HTML, CSS, etc.
@@ -20,6 +21,7 @@ function App() {
       <p>Mi nombre é {name}</p>
       <p>Tenho {calculaIdade()} anos</p>
       <img src={imageURL} alt=""/>
+      <HelloWord/>
     </div>
   );
 }
