@@ -1,27 +1,20 @@
 //import logo from './logo.svg';
 import './App.css';
 import HelloWord from './components/HelloWorld';
+import SayMyName from './components/SayMyName';
+import Pessoa from './components/Pessoa';
 
 function App() {
   //podemos trabalhar também com JS, além de HTML, CSS, etc.
-  const name = 'Eduardo'
-
-  const imageURL = "https://via.placeholder.com/150"
-
-  function calculaIdade() {
-    const a = 1984
-    let b = new Date().getFullYear()
-    return b - a
-  }
-
+  const nome = "Joao"
   return (
     <div className="App">
-      <h1>Hola que tal</h1>
-      <p>Este és mi primero projecto en React</p>
-      <p>Mi nombre é {name}</p>
-      <p>Tenho {calculaIdade()} anos</p>
-      <img src={imageURL} alt=""/>
       <HelloWord/>
+      <SayMyName nome="Eduardo"/>
+      <Pessoa nome="Eduardo" idade="40" profissao="Programador" 
+                        foto="https://via.placeholder.com/150"/>
+      <SayMyName nome="Camila"/>
+      <SayMyName nome={nome}/>
     </div>
   );
 }
