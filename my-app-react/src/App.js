@@ -9,6 +9,7 @@ import Home from './pages/Home';
 import Company from './pages/Company';
 import Contact from './pages/Contact';
 import NavBar from './components/NavBar';
+import Footer from './components/Footer';
 //podemos trabalhar também com JS, além de HTML, CSS, etc.
 function App() {
   
@@ -20,6 +21,7 @@ function App() {
         <Route path='/company' element={<Company/>}/>
         <Route path='/contact' element={<Contact/>}/>
       </Routes>
+      <Footer/>
     </Router>
   );
 }
