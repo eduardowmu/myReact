@@ -1,21 +1,26 @@
-//import logo from './logo.svg';
 import './App.css';
-import { useState } from 'react';
-import YourName from './components/YourName';
-import Welcome from './components/Welcome';
-
+/**
+ * about changes from Switch to Routes
+ * https://stackoverflow.com/questions/63124161/
+ * attempted-import-error-switch-is-not-exported-from-react-router-dom
+*/
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Company from './pages/Company';
+import Contact from './pages/Contact';
+import NavBar from './components/NavBar';
 //podemos trabalhar também com JS, além de HTML, CSS, etc.
 function App() {
-  //useState, definindo no componente pai
-  const [name, setName] = useState()
-
+  
   return (
-    <div className="App">
-      <h1>State Lift Class</h1>
-      <YourName setName={setName}/>
-      <p>{name}</p>
-      <Welcome name={name}/>
-    </div>
+    <Router>
+      <NavBar/>
+      <Routes>
+        <Route path='/' element={<Home/>}/>
+        <Route path='/company' element={<Company/>}/>
+        <Route path='/contact' element={<Contact/>}/>
+      </Routes>
+    </Router>
   );
 }
 
