@@ -1,0 +1,23 @@
+.container {
+    width: 1200px;
+    /*posiciona os elementos mais fácil*/
+    display: flex;
+    /*cria um espaçamento uniforme entre os
+    menus*/
+    justify-content: space-between;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.min-height {
+    min-height: 75%;
+}
+
+.start {
+    justify-content: flex-start;
+}
+
+.column {
+    flex-direction: column;
+    justify-content: flex-start;
+}
