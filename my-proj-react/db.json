@@ -21,6 +21,17 @@
       "budget": "5000",
       "cost": 0,
       "services": []
+    },
+    {
+      "id": "7d7c",
+      "name": "Projeto Teste 3",
+      "budget": "5000",
+      "category": {
+        "id": "1",
+        "name": "Infra"
+      },
+      "cost": 0,
+      "services": []
     }
   ],
   "categories": [

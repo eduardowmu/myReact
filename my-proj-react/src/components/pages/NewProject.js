@@ -6,6 +6,7 @@ function NewProject() {
     /**
      * este hook irá nos permitir criar redirects
      * nas páginas do nosso projeto.
+     * https://stackoverflow.com/questions/62082869/uncaught-typeerror-history-push-is-not-a-function-error-occurs
      */
     const history = useNavigate()
 
