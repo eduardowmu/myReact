@@ -8,11 +8,11 @@ function Projects() {
     if(location.state) {
         message = location.state.message
     }
-
+    
     return(
         <div>
             <h1>My Projects</h1>
-            {message && <Message type='success' msg={message}/>}
+            {message && <Message msg={message} type='success'/>}
         </div>
     )
 }

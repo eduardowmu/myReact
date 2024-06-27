@@ -26,7 +26,11 @@ function NewProject() {
                 console.log(data)
                 //será feita um redirect futuramente
                 history('/projects', 
-                    {message: 'Project Created!'}
+                    /**
+                     * https://stackoverflow.com/questions/76435306/babel-preset-react-app-is-importing-the-babel-plugin-proposal-private-propert
+                     * https://refine.dev/blog/usenavigate-react-router-redirect/
+                     */
+                    { state:{ message: 'Project Created!' }}
                 )
             })
         .catch(err => console.log(err))
