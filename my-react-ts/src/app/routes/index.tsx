@@ -1,16 +1,19 @@
-import { BrowserRouter as Router, Route, Routes as Switch, Navigate as Redirect } from 'react-router-dom'
-import { Login } from '../pages/Login'
-import { Dashboard } from '../pages/Dashboard'
-
-
+import { BrowserRouter, Route, Routes as Switch,  Navigate } from "react-router-dom";
+import { Dashboard } from "../pages";
+/**
+ * 1 - O 'element', acompanhado com o componente entre </>, 
+ * é que subsitui o antigo exact. Isso não permite que
+ * seja renderizado com outra rota qualquer.
+ * 
+ * 2 - O Navigate serve como um friendlyURL
+ */
 export const Routes = () => {
     return(
-        <Router>
+        <BrowserRouter>
             <Switch>
-                <Route path='/entrar' element={<Login/>}/>
-                <Route path='/pagina-inicial' element={<Dashboard/>}/>
-                <Route path='*' element={<Redirect to='/pagina-inicial'/>}/>
+                <Route path="/pagina-inicial" element={<Dashboard/>}/>
+                <Route path="*" Component={() => <Navigate to='/pagina-inicial'/>}/>
             </Switch>
-        </Router>
-    )
+        </BrowserRouter>
+    );
 }

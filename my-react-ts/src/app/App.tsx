@@ -2,11 +2,11 @@
 // import logo from './logo.svg';
 // import './App.css';
 
+import { Routes } from "./routes/Index";
+
 export const App = () => {
   return (
-    <div className="App">
-      Olá! Bem vindos ao meu primeiro projeto em React TS
-    </div>
+    <Routes/>
   );
 }
 
