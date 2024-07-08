@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import { useEffect } from "react"
 
 
@@ -6,19 +6,23 @@ export const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    useEffect(() => {
-        if(window.confirm('Are tou there?')) {
-            console.log('YES')
-        } else {
-            console.log('NO')
-        }
-    /**Como ainda não temos nenhuma dependência,
-     * então o segundo parametro pode ser um array
-     * vazio. Com isso, esta "função" será executada
-     * apenas uma vez, ou seja, somente quando nosso
-     * componente for carregado uma única vez.
-     */
-    },[]);
+    const emailLength = useMemo(() => {
+        return email.length * 1000
+    },[email]);
+
+    // useEffect(() => {
+    //     if(window.confirm('Are tou there?')) {
+    //         console.log('YES')
+    //     } else {
+    //         console.log('NO')
+    //     }
+    // /**Como ainda não temos nenhuma dependência,
+    //  * então o segundo parametro pode ser um array
+    //  * vazio. Com isso, esta "função" será executada
+    //  * apenas uma vez, ou seja, somente quando nosso
+    //  * componente for carregado uma única vez.
+    //  */
+    // },[]);
 
     useEffect(() => {
         console.log(email, password)
@@ -34,6 +38,7 @@ export const Login = () => {
     return(
         <div>
             <form>
+                <p>Quantidade de caracteres no email: {emailLength}</p>
                 <label>
                     <span>E-mail</span>
                     <input type="email" value={email} 
