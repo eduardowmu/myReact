@@ -1,10 +1,15 @@
-import { useCallback, useMemo, useState } from "react"
+import { useCallback, useMemo, useRef, useState } from "react"
 import { useEffect } from "react"
 
 
 export const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+
+    /**Este useRef irá armazenar uma referencia do elemento
+     * <input/>
+     */
+    const inputPasswordRef = useRef<HTMLInputElement>(null)
 
     const emailLength = useMemo(() => {
         return email.length * 1000
@@ -34,6 +39,10 @@ export const Login = () => {
     
     const handleLogin = useCallback(() => {
         console.log(email, password)
+
+        if(inputPasswordRef.current !== null) {
+            inputPasswordRef.current.focus()
+        }
         /**Se retirarmos essas dependencias, a memoria
          * permanecerá com os mesmos valores iniciais
          * digitados se fizermos alteração.
@@ -48,12 +57,20 @@ export const Login = () => {
                 <p>Quantidade de caracteres no email: {emailLength}</p>
                 <label>
                     <span>E-mail</span>
-                    <input type="email" value={email} 
-                        onChange={e => setEmail(e.target.value)}/>
+                    <input type="email" value={email}
+                        onChange={e => setEmail(e.target.value)}
+                        /**Se teclarmos enter neste campo, irá para o
+                         * input de senha
+                         */
+                        onKeyDown={e => e.key === 'Enter' ? 
+                            inputPasswordRef.current?.focus() : 
+                            /**Caso contrário, nada será feito */
+                            undefined
+                        }/>
                 </label>
                 <label>
                     <span>password</span>
-                    <input type="password" value={password} 
+                    <input type="password" value={password} ref={inputPasswordRef}
                         onChange={e => setPassword(e.target.value)}/>
                 </label>
                 <button type="button" onClick={handleLogin}>
