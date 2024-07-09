@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react"
+import { useCallback, useMemo, useState } from "react"
 import { useEffect } from "react"
 
 
@@ -8,7 +8,7 @@ export const Login = () => {
 
     const emailLength = useMemo(() => {
         return email.length * 1000
-    },[email]);
+    },[email.length]);
 
     // useEffect(() => {
     //     if(window.confirm('Are tou there?')) {
@@ -32,9 +32,16 @@ export const Login = () => {
      */
     },[email, password])
     
-    const handleLogin = () => {
+    const handleLogin = useCallback(() => {
         console.log(email, password)
-    }
+        /**Se retirarmos essas dependencias, a memoria
+         * permanecerá com os mesmos valores iniciais
+         * digitados se fizermos alteração.
+         */
+    },[email, password])
+    // () => {
+    //     console.log(email, password)
+    // }
     return(
         <div>
             <form>
