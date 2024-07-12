@@ -19,11 +19,13 @@ interface InputLoginProps {
  * criando um componente funcional do REACT, atribuindo lhe
  * a interface que possui as propriedades
  */
-export const InputLogin: React.FC<InputLoginProps> = (props) => {
+export const InputLogin = React.forwardRef<HTMLInputElement, InputLoginProps>(
+                (props, ref) => {
     return(
         <label>
             <span>{props.label}</span>
             <input 
+                ref={ref}
                 type={props.type} 
                 value={props.value}
                 onChange={e => props.onChange(e.target.value)}
@@ -37,4 +39,4 @@ export const InputLogin: React.FC<InputLoginProps> = (props) => {
                             undefined}/>
         </label>
     )
-}
+});

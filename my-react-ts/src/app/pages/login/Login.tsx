@@ -63,7 +63,8 @@ export const Login = () => {
                     onChange={onChangeValue => setEmail(onChangeValue)}
                     onPressEnter={() => inputPasswordRef.current?.focus()}/>
                 
-                <InputLogin 
+                <InputLogin
+                    ref={inputPasswordRef}
                     label="Password"
                     type="password"
                     value={password}
