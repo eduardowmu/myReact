@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useRef, useState } from "react"
 import { useEffect } from "react"
 import { InputLogin } from "./components/InputLogin"
+import { ButtonLogin } from "./components/ButtonLogin"
 
 
 export const Login = () => {
@@ -70,9 +71,20 @@ export const Login = () => {
                     value={password}
                     onChange={onChangeValue => setPassword(onChangeValue)}/>
 
-                <button type="button" onClick={handleLogin}>
+                {/* <button type="button" onClick={handleLogin}>
                     Enviar
-                </button>
+                </button> */}
+
+                <ButtonLogin type="button" onClick={handleLogin}>
+                    Entrar
+                </ButtonLogin>
+
+                {/* assim que representamos children, podemos usar o mesmo
+                componente mas com "textos diferentes" */}
+                
+                <ButtonLogin type="button" onClick={handleLogin}>
+                    Cadastrar-se
+                </ButtonLogin>
             </form>
         </div>
     )
