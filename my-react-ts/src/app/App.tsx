@@ -3,10 +3,15 @@
 // import './App.css';
 
 import { Routes } from "./routes/Index";
+import { UsuarioLogadoProvider } from "./shared/contexts";
 
 export const App = () => {
   return (
-    <Routes/>
+    // compartilhando tudo dentro de rotas o contexto
+    // de UsuarioLogadoProvider
+    <UsuarioLogadoProvider>
+      <Routes/>
+    </UsuarioLogadoProvider>
   );
 }
 
