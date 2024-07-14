@@ -1,6 +1,6 @@
-import { useContext, useRef } from "react"
+import { useRef } from "react"
 import { Link } from "react-router-dom"
-import { UsuarioLogadoContext } from "../../shared/contexts"
+import { useUsuarioLogado } from "../../shared/hooks"
 
 export const Dashboard = () => {
     const counterRef = useRef(0)
@@ -13,7 +13,7 @@ export const Dashboard = () => {
     // const usuarioLogadoContext = useContext(UsuarioLogadoContext)
 
     // também podemos compartilhar apenas o atributo
-    const { nomeDoUsuario } = useContext(UsuarioLogadoContext)
+    const { nomeDoUsuario } = useUsuarioLogado()
 
     return(
         <div>
