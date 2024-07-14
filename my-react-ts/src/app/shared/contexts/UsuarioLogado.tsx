@@ -4,7 +4,7 @@ interface UsuarioLogadoContextData {
     nomeDoUsuario: string
 }
 
-const UsuarioLogadoContext = createContext<UsuarioLogadoContextData>(
+export const UsuarioLogadoContext = createContext<UsuarioLogadoContextData>(
     {} as UsuarioLogadoContextData
 );
 
