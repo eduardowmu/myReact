@@ -13,7 +13,7 @@ export const Dashboard = () => {
     // const usuarioLogadoContext = useContext(UsuarioLogadoContext)
 
     // também podemos compartilhar apenas o atributo
-    const { nomeDoUsuario } = useUsuarioLogado()
+    const { nomeDoUsuario, logout } = useUsuarioLogado()
 
     return(
         <div>
@@ -23,6 +23,7 @@ export const Dashboard = () => {
             <p>Contador: {counterRef.current}</p>
             <button onClick={() => counterRef.current++}>Somar</button>
             <button onClick={() => console.log(counterRef.current)}>Log</button>
+            <button onClick={logout}>Logout</button>
             <Link to='/login'>Login</Link>
         </div>
     )
