@@ -4,14 +4,15 @@ import { useCallback, useState } from "react"
  * Esta interface irá representar um item
  * da nossa lista
  */
-interface ListItem {
+interface ListTask {
+    id: number;
     title: string;
-    isSelected: boolean;
+    status: boolean;
 }
 
 export const Dashboard = () => {
     // lista de strings
-    const [list, setList] = useState<ListItem[]>([])
+    const [list, setList] = useState<ListTask[]>([])
     
     /*função que ir´pa tratar algum tipo um evento de algum elemento*/
     const handleInputKeyDown: 
@@ -38,8 +39,9 @@ export const Dashboard = () => {
 
                 return [...oldList,
                     { 
+                        id: oldList.length,
                         title: value,
-                        isSelected: false
+                        status: false
                     }
                 ]
             })
@@ -50,11 +52,11 @@ export const Dashboard = () => {
         <div>
             <p>List Dashboard</p>
             <input onKeyDown={handleInputKeyDown}/>
-            <p>{list.filter((listItem) => listItem.isSelected).length}</p>
+            <p>{list.filter((listItem) => listItem.status).length}</p>
             <ul>
                 {list.map((listItem, index) => {
                     return <>
-                        <li>
+                        <li key={listItem.id}>
                             <input 
                                 type="checkbox"
                                 // isso irá garantir que a checkbox mantenha o valor atualizado
@@ -63,8 +65,8 @@ export const Dashboard = () => {
                                     setList(oldList => {
                                         return oldList.map(oldListItem => {
                                             const newIsSelected = oldListItem.title === listItem.title
-                                                                ? !oldListItem.isSelected 
-                                                                : oldListItem.isSelected
+                                                                ? !oldListItem.status 
+                                                                : oldListItem.status
                                             
                                             return {
                                                 ...oldListItem,
