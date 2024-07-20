@@ -1,7 +1,7 @@
 import { Api } from "../ApiConfig";
 import { ApiException } from "../ApiException";
 
-interface ListTask {
+export interface ListTask {
     id: number;
     title: string;
     status: boolean;

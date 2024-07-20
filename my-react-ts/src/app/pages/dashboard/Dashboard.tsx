@@ -1,18 +1,31 @@
-import { useCallback, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
+import { ListTask, TarefasService } from "../../shared/services/api/tarefas/TarefasService"
+import { ApiException } from "../../shared/services/api/ApiException"
 
 /**
- * Esta interface irá representar um item
- * da nossa lista
+ * 
+ * @returns 
+ * A interface foi retirada pois foi incluída em
+ * TarefasService.ts
  */
-interface ListTask {
-    id: number;
-    title: string;
-    status: boolean;
-}
 
 export const Dashboard = () => {
     // lista de strings
     const [list, setList] = useState<ListTask[]>([])
+
+    /**
+     * Chamando nossa service
+     */
+    useEffect(() => {
+        TarefasService.getAll()
+            .then((result) => {
+                if(result instanceof ApiException) {
+                    console.log(result.message)
+                } else {
+                    setList(result)
+                }
+            })
+    }, [])
     
     /*função que ir´pa tratar algum tipo um evento de algum elemento*/
     const handleInputKeyDown: 
