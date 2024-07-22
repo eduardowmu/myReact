@@ -27,7 +27,7 @@ export const Dashboard = () => {
             })
     }, [])
     
-    /*função que ir´pa tratar algum tipo um evento de algum elemento*/
+    /*função que irá tratar algum tipo um evento de algum elemento*/
     const handleInputKeyDown: 
         React.KeyboardEventHandler<HTMLInputElement> = useCallback((e) => {
         if(e.key === 'Enter') {
@@ -41,25 +41,33 @@ export const Dashboard = () => {
             /*Outra forma também de se fazer com adição de 
             conteúdo na lista*/
             const value = e.currentTarget.value
+            
+            /**
+             * este metodo some() espera um predicate, caso o title
+             * for identico ao valor do campo preenchido, não será
+             * inserido na lista, para não ter repetição.
+             */
+            if(list.some((listItem) => listItem.title === value)) return
 
-            setList((oldList) => {
-                /**
-                 * este metodo some() espera um predicate, caso o title
-                 * for identico ao valor do campo preenchido, não será
-                 * inserido na lista, para não ter repetição.
-                 */
-                if(oldList.some((listItem) => listItem.title === value)) return oldList
-
-                return [...oldList,
-                    { 
-                        id: oldList.length,
-                        title: value,
-                        status: false
-                    }
-                ]
+            /**
+             * Chamando o serviço de criação da tarefa
+             */
+            TarefasService.post({
+                title: value,
+                status: false
+            }).then((result) => {
+                if(result instanceof ApiException) {
+                    console.log(result.message)
+                } else {
+                    setList((oldList) => {
+                        return [...oldList, 
+                            result
+                        ]
+                    })
+                }
             })
         }   
-    }, [])
+    }, [list])
 
     return(
         <div>
@@ -72,12 +80,13 @@ export const Dashboard = () => {
                         <li key={listItem.id}>
                             <input 
                                 type="checkbox"
-                                // isso irá garantir que a checkbox mantenha o valor atualizado
-                                //checked={listItem.isSelected}
+                                // isso irá garantir que a checkbox mantenha o valor 
+                                //atualizado checked={listItem.isSelected}
                                 onChange={() => {
                                     setList(oldList => {
                                         return oldList.map(oldListItem => {
-                                            const newIsSelected = oldListItem.title === listItem.title
+                                            const newIsSelected = oldListItem.title === 
+                                                                listItem.title
                                                                 ? !oldListItem.status 
                                                                 : oldListItem.status
                                             
