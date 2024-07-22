@@ -69,6 +69,45 @@ export const Dashboard = () => {
         }   
     }, [list])
 
+    const handleToggleComplete = useCallback((id: string) => {
+        const tarefaToUpdate = list.find((tarefa) => tarefa.id === id)
+        /**
+         * caso não encontre a tarefa que desejamos
+         * para um update, cancela o update
+         */
+        if(!tarefaToUpdate) return
+        
+        TarefasService.putById(id, {
+            ...tarefaToUpdate, 
+            status: !tarefaToUpdate.status,
+        }).then((result) => {
+            if(result instanceof ApiException) {
+                console.log(result.message)
+            } else {
+                setList(oldList => {
+                    return oldList.map(oldListItem => {
+                        if(oldListItem.id === id) return result
+
+                        return oldListItem
+                    })
+                })
+            }
+        })        
+    }, [list])
+
+    const handleDelete = useCallback((id: string) => {
+        TarefasService.deleteById(id)
+        .then((result) => {
+            if(result instanceof ApiException) {
+                console.log(result.message)
+            } else {
+                setList(oldList => {
+                    return oldList.filter(oldListItem => oldListItem.id !== id)
+                })
+            }
+        })        
+    }, [])
+
     return(
         <div>
             <p>List Dashboard</p>
@@ -80,24 +119,14 @@ export const Dashboard = () => {
                         <li key={listItem.id}>
                             <input 
                                 type="checkbox"
+                                checked={listItem.status}
                                 // isso irá garantir que a checkbox mantenha o valor 
                                 //atualizado checked={listItem.isSelected}
-                                onChange={() => {
-                                    setList(oldList => {
-                                        return oldList.map(oldListItem => {
-                                            const newIsSelected = oldListItem.title === 
-                                                                listItem.title
-                                                                ? !oldListItem.status 
-                                                                : oldListItem.status
-                                            
-                                            return {
-                                                ...oldListItem,
-                                                isSelected: newIsSelected
-                                            }
-                                        })
-                                    })
-                                }}/>
+                                onChange={() => handleToggleComplete(listItem.id)}/>
                                 {listItem.title} {index}
+                            
+                            <button onClick={() => handleDelete(listItem.id)}>
+                                Delete</button>
                         </li>
                     </>
                 })}

@@ -2,7 +2,7 @@ import { Api } from "../ApiConfig";
 import { ApiException } from "../ApiException";
 
 export interface ListTask {
-    id: number;
+    id: string;
     title: string;
     status: boolean;
 }
@@ -30,7 +30,7 @@ const getAll = async (): Promise<ListTask[] | ApiException> => {
     }
 };
 
-const getById = async (id: number): Promise<ListTask | ApiException> => {
+const getById = async (id: string): Promise<ListTask | ApiException> => {
     try {
         const { data } = await Api().get(`/tarefas/${id}`)
         return data
